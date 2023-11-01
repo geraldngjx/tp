@@ -1,0 +1,14 @@
+@startuml
+start
+: User executes command;
+: Parser parses command;
+
+if (Company already exists with same details?) then (yes)
+  : User is informed that the Company already exists;
+  stop
+else (no)
+  : Create a new Company object with provided details;
+  : Update the Model with the new Company;
+  : User is informed that the Company is added;
+  stop
+@enduml

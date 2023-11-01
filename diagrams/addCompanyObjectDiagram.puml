@@ -1,0 +1,36 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title Add Company Object Diagram
+
+class AddCompanyCommand as "__:AddCompanyCommand__"
+class Company as "__:Company__"
+class Name as "__TechCorp:Name__"
+class Industry as "__Technology:Industry__"
+class Location as "__Silicon Valley:Location__"
+class Description as "__Leading tech company:Description__"
+class Website as "__www.techcorp.com:Website__"
+class Email as "__contact@techcorp.com:Email__"
+class Phone as "__12345678:Phone__"
+class Address as "__123 Tech St, Silicon Valley:Address__"
+
+AddCompanyCommand --> Company
+Company --> Name
+Company --> Industry
+Company --> Location
+Company --> Description
+Company --> Website
+Company --> Email
+Company --> Phone
+Company --> Address
+
+Name -[hidden]> Industry
+Industry -[hidden]> Location
+Location -[hidden]> Description
+Description -[hidden]> Website
+Website -[hidden]> Email
+Email -[hidden]> Phone
+Phone -[hidden]> Address
+@end

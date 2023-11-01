@@ -1,0 +1,16 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title Delete Company Object Diagram
+
+class DeleteCompanyCommand as "__:DeleteCompanyCommand__"
+class Company as "__:Company__"
+class CompanyList as "__:List<Company>__"
+
+DeleteCompanyCommand --> Company
+DeleteCompanyCommand --> CompanyList
+
+CompanyList -[hidden]> Company
+@end

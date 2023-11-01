@@ -1,0 +1,32 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title Add Person Object Diagram
+
+class AddPersonCommand as "__:AddPersonCommand__"
+class Person as "__:Person__"
+class Company as "__:Company__"
+class Name as "__John Doe:Name__"
+class Phone as "__98765432:Phone__"
+class Email as "__johnd@example.com:Email__"
+class Address as "__311, Clementi Ave 2, #02-25:Address__"
+class Tag1 as "__friends:Tag__"
+class Tag2 as "__owesMoney:Tag__"
+
+AddPersonCommand --> Person
+Person --> Company
+Person --> Name
+Person --> Phone
+Person --> Email
+Person --> Address
+Person --> Tag1
+Person --> Tag2
+
+Company -[hidden]> Person
+Name -[hidden]> Phone
+Phone -[hidden]> Email
+Email -[hidden]> Address
+Tag1 -[hidden]> Tag2
+@end

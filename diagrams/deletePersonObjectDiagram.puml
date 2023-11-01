@@ -1,0 +1,23 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title Delete Person Object Diagram
+
+class DeletePersonCommand as "__:DeletePersonCommand__"
+class Person as "__:Person__"
+class Company as "__:Company__"
+class CompanyList as "__:List<Company>__"
+class PersonList as "__:PersonList__"
+
+DeletePersonCommand --> Person
+DeletePersonCommand --> Company
+DeletePersonCommand --> CompanyList
+Company --> PersonList
+PersonList --> Person
+
+CompanyList -[hidden]> Company
+Company -[hidden]> PersonList
+PersonList -[hidden]> Person
+@end

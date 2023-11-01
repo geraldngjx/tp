@@ -1,0 +1,16 @@
+@startuml
+start
+: User executes delete command;
+: DeleteCompanyCommandParser parses command;
+
+if (Company exists?) then (yes)
+'  : Remove the Person from the designated Company's list;
+'  : Update the Model by removing the Person from the address book;
+  : Remove the Company from the designated Company's list;
+  : User is informed that the company is deleted;
+  stop
+else (no)
+  : User is informed that the company index is invalid;
+  stop
+endif
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+start
+: User executes command;
+: Parser parses command;
+
+if (Person already exists with same details?) then (yes)
+  : User is informed that the person already exists;
+  stop
+else (no)
+  if (Company exist?) then (yes)
+    : Create a new Person object with provided details;
+    : Add Person to the specified Company;
+    : Update the Model with the new Person;
+    : User is informed that the person is added;
+    stop
+  else (no)
+    : User is informed that the company index is invalid;
+  stop
+@enduml
