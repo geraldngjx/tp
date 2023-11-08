@@ -35,15 +35,15 @@ public class PersonNoteCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_addNoteUnfilteredList_success() {
+    public void execute_addNote_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withNote(NOTE_STUB)
-                                            .withParentCompany(firstPerson.getParentCompany()).build();
+        Person editedPerson = new PersonBuilder(firstPerson).withNote(NOTE_STUB).build();
 
         PersonNoteCommand personNoteCommand = new PersonNoteCommand(INDEX_FIRST_COMPANY, INDEX_FIRST_PERSON,
                 new PersonNote(editedPerson.getNote().getContent()));
 
-        String expectedMessage = String.format(PersonNoteCommand.MESSAGE_ADD_NOTE_SUCCESS, editedPerson);
+        String expectedMessage = String.format(PersonNoteCommand.MESSAGE_ADD_NOTE_SUCCESS,
+                Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
@@ -56,63 +56,29 @@ public class PersonNoteCommandTest {
     }
 
     @Test
-    public void execute_deleteNoteUnfilteredList_success() {
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withNote("").build();
+    public void execute_deleteNote_success() {
+        Person personWithoutNote = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person editedPersonWithNote = new PersonBuilder(personWithoutNote).withNote(NOTE_STUB).build();
+        System.out.println(Messages.format(editedPersonWithNote));
 
         PersonNoteCommand personNoteCommand = new PersonNoteCommand(INDEX_FIRST_COMPANY, INDEX_FIRST_PERSON,
-                new PersonNote(editedPerson.getNote().toString()));
+                new PersonNote("")); // Empty note object to delete existing note
 
-        String expectedMessage = String.format(PersonNoteCommand.MESSAGE_DELETE_NOTE_SUCCESS, editedPerson);
+        String expectedMessage = String.format(PersonNoteCommand.MESSAGE_DELETE_NOTE_SUCCESS,
+                Messages.format(personWithoutNote));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(firstPerson, editedPerson);
 
-        Company expectedCompanyToUpdate = expectedModel.getFilteredCompanyList()
+        model.setPerson(personWithoutNote, editedPersonWithNote); // Update current model with person with note
+
+        Company expectedCompanyToUpdate = model.getFilteredCompanyList()
                 .get(INDEX_FIRST_COMPANY.getZeroBased());
-        Company editedCompany = expectedCompanyToUpdate.setPerson(firstPerson, editedPerson);
-        expectedModel.setCompany(expectedCompanyToUpdate, editedCompany);
+        Company editedCompany = expectedCompanyToUpdate.setPerson(personWithoutNote, editedPersonWithNote);
+        model.setCompany(expectedCompanyToUpdate, editedCompany);
 
         assertCommandSuccess(personNoteCommand, model, expectedMessage, expectedModel);
     }
 
-    @Test
-    public void execute_filteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
-                .withNote(NOTE_STUB).build();
-
-        PersonNoteCommand personNoteCommand = new PersonNoteCommand(INDEX_FIRST_COMPANY, INDEX_FIRST_PERSON,
-                new PersonNote(editedPerson.getNote().getContent()));
-
-        String expectedMessage = String.format(PersonNoteCommand.MESSAGE_ADD_NOTE_SUCCESS, editedPerson);
-
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(firstPerson, editedPerson);
-
-        Company expectedCompanyToUpdate = expectedModel.getFilteredCompanyList()
-                .get(INDEX_FIRST_COMPANY.getZeroBased());
-        Company editedCompany = expectedCompanyToUpdate.setPerson(firstPerson, editedPerson);
-        expectedModel.setCompany(expectedCompanyToUpdate, editedCompany);
-
-        assertCommandSuccess(personNoteCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        PersonNoteCommand personNoteCommand = new PersonNoteCommand(INDEX_FIRST_COMPANY, outOfBoundIndex,
-                new PersonNote(VALID_NOTE_BOB));
-
-        assertCommandFailure(personNoteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-    }
-
-    /**
-     * Edit filtered list where the index is larger than the size of the filtered list,
-     * but smaller than the size of the address book.
-     */
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);

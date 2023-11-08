@@ -108,7 +108,7 @@ public class EntityListPanel extends UiPart<Region> {
         infoBox.setSpacing(5); // Spacing between each label and value
         infoBox.setPadding(new Insets(10, 10, 10, 10)); // Padding around the entire infoBox
 
-        infoBox.getChildren().add( new Label("Industry: " + company.getIndustry()));
+        infoBox.getChildren().add(new Label("Industry: " + company.getIndustry()));
         infoBox.getChildren().add(new Label("Location: " + company.getLocation()));
         infoBox.getChildren().add(new Label("Website: " + company.getWebsite()));
         infoBox.getChildren().add(new Label("Email: " + company.getEmail()));

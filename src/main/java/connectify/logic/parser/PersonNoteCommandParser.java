@@ -6,12 +6,9 @@ import static java.util.Objects.requireNonNull;
 
 import connectify.commons.core.index.Index;
 import connectify.commons.exceptions.IllegalValueException;
-import connectify.logic.commands.AddPersonCommand;
 import connectify.logic.commands.PersonNoteCommand;
 import connectify.logic.parser.exceptions.ParseException;
 import connectify.model.person.PersonNote;
-
-import java.util.stream.Stream;
 
 /**
  * Parses input arguments and creates a new {@code NoteCommand} object

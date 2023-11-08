@@ -203,18 +203,18 @@ public class LogicManagerTest {
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
 
-        model.addCompany(TypicalCompanies.DUMMY_COMPANY); // To be removed in future
+        model.addCompany(TypicalCompanies.COMPANY_1);
         logic = new LogicManager(model, storage);
 
         // Triggers the saveAddressBook method by executing an add command
         String addPersonCommand = AddPersonCommand.COMMAND_WORD
                 + CommandTestUtil.NAME_DESC_AMY + CommandTestUtil.PHONE_DESC_AMY
                 + CommandTestUtil.EMAIL_DESC_AMY + CommandTestUtil.ADDRESS_DESC_AMY
-                + CommandTestUtil.PRIORITY_DESC_AMY;
+                + CommandTestUtil.COMPANY_DESC_AMY + CommandTestUtil.PRIORITY_DESC_AMY;
         Person expectedPerson = new PersonBuilder(TypicalPersons.AMY).withTags().build();
 
         ModelManager expectedModel = new ModelManager();
-        expectedModel.addCompany(TypicalCompanies.DUMMY_COMPANY); // To be removed in future
+        expectedModel.addCompany(TypicalCompanies.COMPANY_1);
 
         List<Company> companies = expectedModel.getFilteredCompanyList();
         Company targetCompany = companies.get(INDEX_FIRST_COMPANY.getZeroBased());

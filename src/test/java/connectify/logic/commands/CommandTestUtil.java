@@ -1,6 +1,7 @@
 package connectify.logic.commands;
 
 import static connectify.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static connectify.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static connectify.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static connectify.logic.parser.CliSyntax.PREFIX_NAME;
 import static connectify.logic.parser.CliSyntax.PREFIX_NOTE;
@@ -59,12 +60,13 @@ public class CommandTestUtil {
 
     public static final String PRIORITY_DESC_AMY = " " + PREFIX_PRIORITY + VALID_PRIORITY_AMY;
     public static final String PRIORITY_DESC_BOB = " " + PREFIX_PRIORITY + VALID_PRIORITY_BOB;
+
+    public static final String COMPANY_DESC_AMY = " " + PREFIX_COMPANY + "1";
+    public static final String COMPANY_DESC_BOB = " " + PREFIX_COMPANY + "2";
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
     public static final String NOTE_DESC_AMY = " " + PREFIX_NOTE + VALID_NOTE_AMY;
-    public static final String NOTE_DESC_BOB = " " + PREFIX_NOTE + VALID_NOTE_BOB;
-
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
