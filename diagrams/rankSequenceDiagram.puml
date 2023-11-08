@@ -1,0 +1,54 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":RankCommandParser" as RankCommandParser LOGIC_COLOR
+participant "c:RankPersonCommand" as RankPersonCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("rank")
+activate LogicManager
+
+LogicManager -> RankCommandParser : parseCommand("rank")
+activate RankCommandParser
+
+create RankPersonCommand
+RankCommandParser -> RankPersonCommand : new()
+activate RankPersonCommand
+
+RankPersonCommand --> RankCommandParser
+deactivate RankPersonCommand
+
+RankCommandParser --> LogicManager
+deactivate RankCommandParser
+
+LogicManager -> RankPersonCommand : execute()
+activate RankPersonCommand
+
+RankPersonCommand -> Model : getFilteredPersonList()
+activate Model
+Model --> RankPersonCommand
+deactivate Model
+
+RankPersonCommand -> Model : sort(PersonPriorityComparator)
+activate Model
+Model --> RankPersonCommand
+deactivate Model
+
+RankPersonCommand -> CommandResult : new(MESSAGE_SUCCESS)
+activate CommandResult
+CommandResult --> RankPersonCommand
+deactivate CommandResult
+
+RankPersonCommand --> LogicManager : result
+deactivate RankPersonCommand
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml

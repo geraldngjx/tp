@@ -1,0 +1,29 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title Note Company Object Diagram
+
+class NoteCompanyCommand as "__:NoteCompanyCommand__" {
+    -index: int
+    -noteText: String
+}
+class Company as "__:Company__" {
+    -name: String
+    -industry: String
+    -location: String
+    -description: String
+    -website: String
+    -email: String
+    -phone: String
+    -address: String
+    -note: Note
+}
+class Note as "__Looking for aspiring frontend developers:Note__"
+
+
+NoteCompanyCommand -down-> Company
+Company -down-> Note
+
+@enduml

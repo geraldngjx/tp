@@ -1,0 +1,19 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title Note Person Object Diagram
+
+class NotePersonCommand as "__:NotePersonCommand__"
+class Person as "__:Person__"
+class Company as "__:Company__"
+class Note as "__Likes to swim:Note__"
+
+NotePersonCommand --> Person
+Person --> Company
+Person --> Note
+
+Company -[hidden]> Person
+Note -[hidden]> Person
+@enduml

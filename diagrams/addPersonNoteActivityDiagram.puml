@@ -1,0 +1,24 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title Activity Diagram for Adding a Note to a Person
+
+start
+:User issues notePerson command;
+:Parse input to extract company index, person index, and note;
+if (Is company index valid?) then (yes)
+  if (Is person index valid within company?) then (yes)
+    :Retrieve the person from the company;
+    :Add or update the note for the person;
+    :Inform user of successful note addition;
+  else (no)
+    :Inform user that person index is invalid;
+  endif
+else (no)
+  :Inform user that company index is invalid;
+endif
+stop
+
+@enduml

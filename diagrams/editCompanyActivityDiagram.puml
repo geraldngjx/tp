@@ -1,0 +1,15 @@
+@startuml
+start
+: User executes edit command;
+: EditCompanyCommandParser parses command;
+if (Company index valid?) then (yes)
+  : Retrieve Company from address book;
+  : Update Company details;
+  : Company details are updated in address book;
+  : User is informed that the company is updated;
+  stop
+else (no)
+  : User is informed that the company index is invalid;
+  stop
+endif
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title noteCompany Activity Diagram
+
+start
+:User executes noteCompany command;
+:Parse input to extract index and note;
+if (Is index valid?) then (yes)
+  :Retrieve company by index;
+  if (Is note text provided?) then (yes)
+    :Assign new note to company;
+    :Inform user of successful note addition;
+  else (no)
+    :Remove existing note from company;
+    :Inform user of note removal;
+  endif
+else (no)
+  :Inform user that index is invalid;
+endif
+stop
+@enduml

@@ -1,0 +1,35 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title Edit Company Object Diagram
+
+class EditCompanyCommand as "__:EditCompanyCommand__"
+class Company as "__:Company__"
+class NewName as "__n/TechCorp:Name__" << optional >>
+class NewIndustry as "__i/Technology:Industry__" << optional >>
+class NewLocation as "__l/Silicon Valley:Location__" << optional >>
+class NewDescription as "__d/Innovative Tech Company:Description__" << optional >>
+class NewWebsite as "__w/www.techcorp.com:Website__" << optional >>
+class NewEmail as "__e/info@techcorp.com:Email__" << optional >>
+class NewPhone as "__p/91234567:Phone__" << optional >>
+class NewAddress as "__a/123, Tech Avenue:Address__" << optional >>
+
+EditCompanyCommand --> Company
+Company --> NewName
+Company --> NewIndustry
+Company --> NewLocation
+Company --> NewDescription
+Company --> NewWebsite
+Company --> NewEmail
+Company --> NewPhone
+Company --> NewAddress
+
+NewName -[hidden]> NewIndustry
+NewIndustry -[hidden]> NewLocation
+NewLocation -[hidden]> NewDescription
+NewDescription -[hidden]> NewWebsite
+NewEmail -[hidden]> NewPhone
+NewPhone -[hidden]> NewAddress
+@enduml
