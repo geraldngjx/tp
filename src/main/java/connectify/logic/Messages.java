@@ -49,7 +49,7 @@ public class Messages {
                 .append(person.getAddress())
                 .append("; Note: ")
                 .append(person.getNote())
-                .append("Priority: ")
+                .append("; Priority: ")
                 .append(person.getPriority())
                 .append("; Company: ");
         if (person.getParentCompany() != null) {
