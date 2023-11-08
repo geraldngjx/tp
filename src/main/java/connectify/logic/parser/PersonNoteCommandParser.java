@@ -6,9 +6,12 @@ import static java.util.Objects.requireNonNull;
 
 import connectify.commons.core.index.Index;
 import connectify.commons.exceptions.IllegalValueException;
+import connectify.logic.commands.AddPersonCommand;
 import connectify.logic.commands.PersonNoteCommand;
 import connectify.logic.parser.exceptions.ParseException;
 import connectify.model.person.PersonNote;
+
+import java.util.stream.Stream;
 
 /**
  * Parses input arguments and creates a new {@code NoteCommand} object
@@ -22,6 +25,8 @@ public class PersonNoteCommandParser implements Parser<PersonNoteCommand> {
     public PersonNoteCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NOTE);
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NOTE);
 
         try {
             String[] splitArgs = args.trim().split("\\s+");
@@ -40,5 +45,13 @@ public class PersonNoteCommandParser implements Parser<PersonNoteCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     PersonNoteCommand.MESSAGE_USAGE), ive);
         }
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

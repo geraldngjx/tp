@@ -34,13 +34,13 @@ public class AddPersonCommandParser implements Parser<AddPersonCommand> {
                         CliSyntax.PREFIX_COMPANY, CliSyntax.PREFIX_PRIORITY);
 
         if (!arePrefixesPresent(argMultimap, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_ADDRESS,
-                CliSyntax.PREFIX_PHONE, CliSyntax.PREFIX_EMAIL, CliSyntax.PREFIX_PRIORITY)
+                CliSyntax.PREFIX_PHONE, CliSyntax.PREFIX_EMAIL, CliSyntax.PREFIX_PRIORITY, CliSyntax.PREFIX_COMPANY)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddPersonCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_PHONE, CliSyntax.PREFIX_EMAIL,
-                CliSyntax.PREFIX_ADDRESS);
+                CliSyntax.PREFIX_ADDRESS, CliSyntax.PREFIX_COMPANY, CliSyntax.PREFIX_PRIORITY);
         PersonName name = ParserPersonUtil.parseName(argMultimap.getValue(CliSyntax.PREFIX_NAME).get());
         PersonPhone personPhone = ParserPersonUtil.parsePhone(argMultimap.getValue(CliSyntax.PREFIX_PHONE).get());
         PersonEmail personEmail = ParserPersonUtil.parseEmail(argMultimap.getValue(CliSyntax.PREFIX_EMAIL).get());
@@ -50,8 +50,7 @@ public class AddPersonCommandParser implements Parser<AddPersonCommand> {
         Set<Tag> tagList = ParserPersonUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG));
 
         // Defaults to first company if no company index is provided
-        Index companyIndex = ParserCompanyUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_COMPANY)
-                .orElse("1"));
+        Index companyIndex = ParserCompanyUtil.parseIndex(argMultimap.getValue(CliSyntax.PREFIX_COMPANY).get());
         PersonPriority priority = ParserPersonUtil
             .parsePersonPriority(argMultimap.getValue(CliSyntax.PREFIX_PRIORITY).get());
         Person person = new Person(name, personPhone, personEmail, personAddress, tagList, note, priority);
