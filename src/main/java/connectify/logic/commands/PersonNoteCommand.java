@@ -82,7 +82,7 @@ public class PersonNoteCommand extends Command {
      */
     private String generateSuccessMessage(Person personToEdit) {
         String message = !note.getContent().isEmpty() ? MESSAGE_ADD_NOTE_SUCCESS : MESSAGE_DELETE_NOTE_SUCCESS;
-        return String.format(message, personToEdit);
+        return String.format(message, Messages.format(personToEdit));
     }
 
     @Override
