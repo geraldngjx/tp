@@ -141,7 +141,14 @@
         "tutorial-adding-your-first-connection": "Tutorial: Adding your first connection",
         "features": "Features",
         "features-for-managing-company-details": "Features for managing company details",
-        "features-for-managing-people-contact-details": "Features for managing people contact details"
+        "features-for-managing-people-contact-details": "Features for managing people contact details",
+        "general-commands": "General Commands",
+        "faq": "FAQ",
+        "known-issues": "Known issues",
+        "command-summary": "Command Summary",
+        "managing-companies": "Managing Companies",
+        "manging-people-contacts": "Manging People Contacts",
+        "general-commands-2": "General Commands"
       },
       "headingKeywords": {}
     },
@@ -185,6 +192,7 @@
     },
     {
       "src": "team/victorpengmx.md",
+      "title": "Peng Victor M X's Project Portfolio Page",
       "headings": {
         "project-connectify": "Project: Connectify"
       },
