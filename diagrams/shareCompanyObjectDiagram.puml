@@ -1,0 +1,18 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title Share Company Object Diagram
+
+class ShareCompanyCommand as "__:ShareCompanyCommand__" {
+  - companyIndex: int
+}
+class Company as "__:Company__" {
+  - index: int
+}
+
+SharePersonCommand --> Company
+
+
+@enduml

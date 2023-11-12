@@ -1,0 +1,52 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":ConnectifyParser" as ConnectifyParser LOGIC_COLOR
+participant "d:ListPeopleCommand" as ListPeopleCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("people")
+activate LogicManager
+
+LogicManager -> ConnectifyParser : parseCommand("people")
+activate ConnectifyParser
+
+create ListPeopleCommand
+ConnectifyParser -> ListPeopleCommand : new ListPeopleCommand()
+activate ListPeopleCommand
+
+ListPeopleCommand --> ConnectifyParser : d
+deactivate ListPeopleCommand
+
+ConnectifyParser --> LogicManager : d
+deactivate ConnectifyParser
+
+LogicManager -> ListPeopleCommand : execute()
+activate ListPeopleCommand
+
+ListPeopleCommand -> Model : update person list
+activate Model
+
+Model --> ListPeopleCommand
+deactivate Model
+
+create CommandResult
+ListPeopleCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> ListPeopleCommand
+deactivate CommandResult
+
+ListPeopleCommand --> LogicManager : result
+deactivate ListPeopleCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

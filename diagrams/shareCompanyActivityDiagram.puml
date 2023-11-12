@@ -1,0 +1,19 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+
+title Activity Diagram for Sharing a Company's Contact
+
+start
+:User issues shareCompany command;
+:Parse command to extract indices;
+if (Are indices valid?) then (yes)
+  :Retrieve Company details from list of companies;
+  :Generate share command string;
+  :Display command string for user to copy;
+else (no)
+  :User is informed that the indices are invalid;
+endif
+stop
+@enduml
