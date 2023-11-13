@@ -971,6 +971,6 @@ with(this){return _c('h3',{attrs:{"id":"challenges-overcame"}},[_v("Challenges O
 with(this){return _c('ul',[_c('li',[_v("Use of JavaFX to effectively implement the GUI for Connectify.")]),_v(" "),_c('li',[_v("Use of PlantUML to effectively implement the UML diagrams for Connectify.")])])}
 },function anonymous(
 ) {
-with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.1.0")]),_v(", generated on Sun, 12 Nov 2023, 16:51:23 GMT+8]")])])])}
+with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.1.0")]),_v(", generated on Mon, 13 Nov 2023, 12:57:56 GMT+8]")])])])}
 }];
   
